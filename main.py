@@ -1,59 +1,69 @@
-from flask import Flask, request
-import requests
-from google.oauth2.service_account import Credentials
-from googleapiclient.discovery import build
+from telethon import TelegramClient, events
 from datetime import datetime
+import json
+import os
 
-app = Flask(__name__)
+# ---- THÔNG SỐ BOT ----
+api_id = 1234567          # API ID của bạn
+api_hash = "your_api_hash"
+bot_token = "your_bot_token"
 
-# ---------------- BOT ----------------
-BOT_TOKEN = "7700824508:AAGk2jYcj30Cao7UPk25YyNlEj89WA2WDzA"
+# ---- TÊN FILE LƯU LOG ----
+TEXT_LOG = "log.txt"
+JSON_LOG = "log.json"
 
-# ------------- Google Sheets --------------
-SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
-SPREADSHEET_ID = "1k6Tyyy8MQTulM9v1K8jiKWmYtJQ2Iv4dBCAILWijJig"  # Thay bằng ID file Google Sheet của bạn
-CREDS = Credentials.from_service_account_file(
-    "caramel-banner-479518-c9-111cee878a32.json",  # hoặc tên file JSON bạn tải về
-    scopes=SCOPES
-)
+# ---- KHỞI TẠO FILE LOG ----
+if not os.path.exists(JSON_LOG):
+    with open(JSON_LOG, "w", encoding="utf-8") as f:
+        json.dump([], f, ensure_ascii=False, indent=2)
 
-def append_row(values):
-    """Hàm ghi một dòng vào Google Sheet"""
-    service = build("sheets", "v4", credentials=CREDS)
-    body = {"values": [values]}
-    service.spreadsheets().values().append(
-        spreadsheetId=SPREADSHEET_ID,
-        range="Sheet1!A:G",  # Tên sheet và số cột
-        valueInputOption="RAW",
-        body=body
-    ).execute()
 
-# --------------- Webhook ----------------
-@app.route("/webhook", methods=["POST"])
-def webhook():
-    data = request.get_json()
+client = TelegramClient("bot_session", api_id, api_hash).start(bot_token=bot_token)
 
-    if "message" in data:
-        text = data["message"].get("text", "")
-        chat_id = data["message"]["chat"]["id"]
-        name = data["message"]["chat"].get("first_name", "Unknown")
-        shift = "Ca 1"           # Bạn có thể lấy từ message nếu muốn
-        start = "08:00"
-        end = "17:00"
 
-        # Gửi phản hồi tin nhắn Telegram
-        requests.get(
-            f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage",
-            params={"chat_id": chat_id, "text": f"Bot nhận được: {text}"}
-        )
+# ---- HÀM GHI LOG ----
+def save_log(username, action, time_raw):
+    now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-        # Nếu message chứa #checkin → ghi vào Google Sheet
-        if "#checkin" in text.lower():
-            append_row([name, "checkin", shift, start, end, text, datetime.now().isoformat()])
+    # Ghi text
+    with open(TEXT_LOG, "a", encoding="utf-8") as f:
+        f.write(f"{now} | {username} | {action} | {time_raw}\n")
 
-    return "ok"
+    # Ghi json
+    with open(JSON_LOG, "r", encoding="utf-8") as f:
+        data = json.load(f)
 
-# ------------- Chạy Flask ---------------
-if __name__ == "__main__":
-    # Host 0.0.0.0 để Render truy cập được
-    app.run(host="0.0.0.0", port=5000)
+    data.append({
+        "timestamp": now,
+        "username": username,
+        "action": action,
+        "time": time_raw
+    })
+
+    with open(JSON_LOG, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+
+
+# ---- LẮNG NGHE TIN NHẮN ----
+@client.on(events.NewMessage(pattern=r"#checkin|#checkout|#checkin|#check_out"))
+async def handler(event):
+    text = event.raw_text.lower()
+
+    username = event.sender.username or event.sender.first_name
+    time_raw = text.replace("#checkin", "").replace("#checkout", "").strip()
+
+    if "#checkin" in text:
+        action = "checkin"
+    elif "#checkout" in text:
+        action = "checkout"
+    else:
+        return  # không phải cú pháp → bỏ qua
+
+    save_log(username, action, time_raw)
+
+    # Phản hồi gọn
+    await event.reply(f"Đã ghi log cho **{username}**: {action.upper()} lúc {time_raw}")
+
+
+print("Bot đang chạy...")
+client.run_until_disconnected()
