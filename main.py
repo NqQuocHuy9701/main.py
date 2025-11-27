@@ -11,9 +11,9 @@ BOT_TOKEN = "7700824508:AAGk2jYcj30Cao7UPk25YyNlEj89WA2WDzA"
 
 # ------------- Google Sheets --------------
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
-SPREADSHEET_ID = "PUT_SHEET_ID_HERE"  # Thay bằng ID file Google Sheet của bạn
+SPREADSHEET_ID = "1k6Tyyy8MQTulM9v1K8jiKWmYtJQ2Iv4dBCAILWijJig"  # Thay bằng ID file Google Sheet của bạn
 CREDS = Credentials.from_service_account_file(
-    "service.json",  # hoặc tên file JSON bạn tải về
+    "caramel-banner-479518-c9-111cee878a32.json",  # hoặc tên file JSON bạn tải về
     scopes=SCOPES
 )
 
