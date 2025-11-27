@@ -14,7 +14,7 @@ BOT_TOKEN = "7700824508:AAGk2jYcj30Cao7UPk25YyNlEj89WA2WDzA"
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
 
 # Đọc file JSON Service Account từ cùng thư mục
-JSON_FILE = "service.json"  # Thay bằng tên file JSON bạn tải
+JSON_FILE = "caramel-banner-479518-c9-111cee878a32.json"  # Thay bằng tên file JSON bạn tải
 if not os.path.exists(JSON_FILE):
     print(f"ERROR: Không tìm thấy file JSON Service Account: {JSON_FILE}")
 
