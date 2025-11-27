@@ -1,13 +1,1 @@
-{
-  "type": "service_account",
-  "project_id": "caramel-banner-479518-c9",
-  "private_key_id": "111cee878a323141b82839b10026d89b14c03a4e",
-  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDIBSslsMK5ykrf\nbJccCEgLrrPQIRUYUb6t8UNJy/8TGjI2tYsXC9wghCS74WxxO9uV84Ims8sSBg4H\nSM2C6YyIsxY86qQnSvE1wXa5MF3fuFHNVnfVjay1grfEjJnRs21OKRYrSsF5tIV2\nyio5zsUrPt2toFzoDzWMluZh+g9NMZAdg1qnwJTL9RV4SnkwvW14ASagZckt8/gh\n6J4iOfFzN5NuxorJhZMhQlOoqaMRuM0l5Uj9rhbr7hr8kwkH6SJPtAPJNgyI2adv\ntmjhlFzlpL/RygOyqHX5ePIpzuJ8xpN06fnmR3VUuCxheCRuwg2DArLsb/Rww1w/\nJE0RhTnXAgMBAAECggEAVx2FKs+/J8sW7BNwBvoGYuwujZ3zAZoMydZz/461JB07\nNH/COgHk2FalZxzprbGr1DXwACo7bjir4HlRZMySdDFHpLVvVFu8DbUan9KUeC1f\nl2arH5wqVg2+OwEft2kF2M5lROq0tGyu2kt3s6C+WDTzuLzI6htBr99DLPYLtwrz\nKNRUlsRB63uMkxGoyi7q6slMkif5VI4zSKiD8gWFV+jpRXmfDfJLsZvCtnvS2xIa\nI48BWW6PjAlcwi1gKWVZKj5qs7fEB82ZPkNpwNTOI2i7gpzfzHoKXAmljNydnLio\nA8JoXLQFE8mq0zvuFNMX5ATIyVtwMplBzsuonNPynQKBgQDwVBoH3EYL56cSsmRv\nb5dvqA6ceSReE1qHexcjFHOBbSdts6kgW5Jw3w0pfhgDAx2yGkkWsPOClVbGG8TR\ndHBMwVqrwepiWZ7HttHdIHdpdyyEi8YLqqP4vUAXl5/d5C9snrTv18wmmUYDo/5z\nOJ7uzobTcMOlgZx9ZuEXdQdLGwKBgQDVEC8d6gOiVYSLfxDOk1M6oK8/j316U//M\nK5I//DSkfLMbtr02RWGAkOnbBzaxPNhAuMFgmNj5i6D2G/wYAg+xW3bGfblUAeoD\n/Rpys8/Xmp/B8ywKyCgo0gy9eMc0Z9DdFTWABZJ/ji/1rEDHMQ8uMW0bjyIfHxFg\nr2WK7UOb9QKBgFv7JFdb1CdcSxKZ2lzYLfKbNLRonSWwbJar4sgXXLntiAixmYp7\n4cl3ZTc7Pn9wot32t4CKyzhwZdy+5g5wbUbDPiu8tTNdL6sqapoigfGIni5AvNTc\nQ5PBAxXEf3hSjGAbQg8F3ensAeME0i9RPWsS+oFUiF0BBV7tkDsFHHx/AoGBAMp4\nqb3Mr41ppR6HLqqQeExDfKZzLnO8NV6JnV6uxjv1wKM6gg572k855vHcpg3B22ON\n7z5jofVqyhh2uZb7BnythW7U9PQvKXqG4MZVt9KUvvKpqpXIZdl82tyHVQ6pBWPD\nDudM5E3RCiR1f82LAnkMQToqR+u5M2Nk6qMeG9ytAoGBAMAEOsMSGOqlkwTuq4GC\n95DFAeqm8q6ORkcSUM8z403Oyk/w3t/soIaYsV/1ubaN1Re3PGXF52UCg9twD/wj\nACED9ExDrSbZGVlFEQH2Ojl46W2ibosTsojsjnHsMlXU3hFYd3oZ3xgjmTyp/Szs\nYIM9K8ORAroacEGcwM+gQlcd\n-----END PRIVATE KEY-----\n",
-  "client_email": "bot-checkinout@caramel-banner-479518-c9.iam.gserviceaccount.com",
-  "client_id": "114902662203221804733",
-  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-  "token_uri": "https://oauth2.googleapis.com/token",
-  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/bot-checkinout%40caramel-banner-479518-c9.iam.gserviceaccount.com",
-  "universe_domain": "googleapis.com"
-}
+
