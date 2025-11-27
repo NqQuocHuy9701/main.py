@@ -19,7 +19,7 @@ if not json_content:
     raise Exception("Biến môi trường GOOGLE_SERVICE_JSON chưa được set!")
 
 CREDS = Credentials.from_service_account_info(json.loads(json_content), scopes=SCOPES)
-SPREADSHEET_ID = "PUT_SHEET_ID_HERE"  # Thay bằng ID Google Sheet của bạn
+SPREADSHEET_ID = "1k6Tyyy8MQTulM9v1K8jiKWmYtJQ2Iv4dBCAILWijJig"  # Thay bằng ID Google Sheet của bạn
 
 def append_row(values):
     """Hàm ghi một dòng vào Google Sheet với debug"""
