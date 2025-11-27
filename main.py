@@ -1,9 +1,9 @@
 from flask import Flask, request
 import requests
+import os, json
 from google.oauth2.service_account import Credentials
 from googleapiclient.discovery import build
 from datetime import datetime
-import os
 
 app = Flask(__name__)
 
@@ -13,13 +13,13 @@ BOT_TOKEN = "7700824508:AAGk2jYcj30Cao7UPk25YyNlEj89WA2WDzA"
 # ------------- Google Sheets --------------
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
 
-# Đọc file JSON Service Account từ cùng thư mục
-JSON_FILE = "caramel-banner-479518-c9-111cee878a32.json"  # Thay bằng tên file JSON bạn tải
-if not os.path.exists(JSON_FILE):
-    print(f"ERROR: Không tìm thấy file JSON Service Account: {JSON_FILE}")
+# Lấy JSON Service Account từ biến môi trường
+json_content = os.environ.get("GOOGLE_SERVICE_JSON")
+if not json_content:
+    raise Exception("Biến môi trường GOOGLE_SERVICE_JSON chưa được set!")
 
-CREDS = Credentials.from_service_account_file(JSON_FILE, scopes=SCOPES)
-SPREADSHEET_ID = "1k6Tyyy8MQTulM9v1K8jiKWmYtJQ2Iv4dBCAILWijJig"  # Thay bằng ID file Google Sheet
+CREDS = Credentials.from_service_account_info(json.loads(json_content), scopes=SCOPES)
+SPREADSHEET_ID = "PUT_SHEET_ID_HERE"  # Thay bằng ID Google Sheet của bạn
 
 def append_row(values):
     """Hàm ghi một dòng vào Google Sheet với debug"""
