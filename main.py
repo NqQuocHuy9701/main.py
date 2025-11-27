@@ -11,22 +11,24 @@ BOT_TOKEN = "7700824508:AAGk2jYcj30Cao7UPk25YyNlEj89WA2WDzA"
 
 # ------------- Google Sheets --------------
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
-SPREADSHEET_ID = "1k6Tyyy8MQTulM9v1K8jiKWmYtJQ2Iv4dBCAILWijJig"  # Thay bằng ID file Google Sheet của bạn
-CREDS = Credentials.from_service_account_file(
-    "service.json",  # hoặc tên file JSON bạn tải về
-    scopes=SCOPES
-)
+SPREADSHEET_ID = "PUT_SHEET_ID_HERE"  # Thay bằng ID file Google Sheet của bạn
+CREDS = Credentials.from_service_account_file("service.json", scopes=SCOPES)
 
 def append_row(values):
-    """Hàm ghi một dòng vào Google Sheet"""
-    service = build("sheets", "v4", credentials=CREDS)
-    body = {"values": [values]}
-    service.spreadsheets().values().append(
-        spreadsheetId=SPREADSHEET_ID,
-        range="Sheet1!A:G",  # Tên sheet và số cột
-        valueInputOption="RAW",
-        body=body
-    ).execute()
+    """Hàm ghi một dòng vào Google Sheet với debug"""
+    print("DEBUG: append_row gọi với values =", values)  # Log ra console Render
+    try:
+        service = build("sheets", "v4", credentials=CREDS)
+        body = {"values": [values]}
+        service.spreadsheets().values().append(
+            spreadsheetId=SPREADSHEET_ID,
+            range="Sheet1!A:G",
+            valueInputOption="RAW",
+            body=body
+        ).execute()
+        print("DEBUG: Ghi Google Sheet thành công ✅")
+    except Exception as e:
+        print("ERROR: Ghi Google Sheet thất bại ❌", e)
 
 # --------------- Webhook ----------------
 @app.route("/webhook", methods=["POST"])
@@ -37,7 +39,7 @@ def webhook():
         text = data["message"].get("text", "")
         chat_id = data["message"]["chat"]["id"]
         name = data["message"]["chat"].get("first_name", "Unknown")
-        shift = "Ca 1"           # Bạn có thể lấy từ message nếu muốn
+        shift = "Ca 1"
         start = "08:00"
         end = "17:00"
 
@@ -55,5 +57,4 @@ def webhook():
 
 # ------------- Chạy Flask ---------------
 if __name__ == "__main__":
-    # Host 0.0.0.0 để Render truy cập được
     app.run(host="0.0.0.0", port=5000)
