@@ -7,14 +7,12 @@ from datetime import datetime
 app = Flask(__name__)
 
 # ---------------- BOT ----------------
-BOT_TOKEN = "7700824508:AAGk2jYcj30Cao7UPk25YyNlEj89WA2WDzA"
+BOT_TOKEN = "7700824508:AAFd4ZoMyohvCfO3MpESd71plqJ7f9vcxBU"
 
 # ------------- Google Sheets --------------
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
 SPREADSHEET_ID = "1k6Tyyy8MQTulM9v1K8jiKWmYtJQ2Iv4dBCAILWijJig"  # Thay bằng ID file Google Sheet của bạn
-CREDS = Credentials.from_service_account_file(
-    "caramel-banner-479518-c9-111cee878a32.json",  # hoặc tên file JSON bạn tải về
-    scopes=SCOPES
+
 )
 
 def append_row(values):
